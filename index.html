@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EN101 Curricular Change - Support System Map</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.3;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 1500px;
+            width: 100%;
+        }
+        
+        .circles-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+        }
+        
+        .hierarchy-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .section-header.core {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .section-header.close {
+            background: linear-gradient(135deg, #c7d2fe 0%, #a78bfa 100%);
+            color: #5b21b6;
+        }
+        
+        .section-header.supporting {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%);
+            color: #6d28d9;
+        }
+        
+        .section-header h3 {
+            font-size: 1.4em;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        .stakeholder-group {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 0.95em;
+            text-align: center;
+            line-height: 1.5;
+            word-wrap: break-word;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .stakeholder-group:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            border-color: #8b5cf6;
+        }
+        
+        .stakeholder-group.core {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .stakeholder-group.close {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .stakeholder-group.supporting {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            color: #5b21b6;
+            font-weight: 500;
+            border: 2px solid #a78bfa;
+        }
+        
+        .excluded-section {
+            margin-top: 50px;
+            padding: 30px;
+            background: #fef3c7;
+            border-left: 5px solid #f59e0b;
+            border-radius: 8px;
+        }
+        
+        .excluded-section h2 {
+            color: #92400e;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .excluded-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #fde68a;
+        }
+        
+        .excluded-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .excluded-item h3 {
+            color: #b45309;
+            font-size: 1.05em;
+            margin-bottom: 8px;
+        }
+        
+        .excluded-item p {
+            color: #78350f;
+            line-height: 1.7;
+        }
+        
+        .references-section {
+            margin-top: 50px;
+            padding: 30px;
+            background: #f0f9ff;
+            border-left: 5px solid #0ea5e9;
+            border-radius: 8px;
+        }
+        
+        .references-section h2 {
+            color: #075985;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .reference-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .reference-item p {
+            color: #0c4a6e;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .reference-item a {
+            color: #0284c7;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .reference-item a:hover {
+            text-decoration: underline;
+            color: #0369a1;
+        }
+        
+        .info-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 550px;
+            width: 90%;
+            z-index: 1000;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .info-panel.active {
+            display: block;
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        
+        .close-btn:hover {
+            background: #dc2626;
+        }
+        
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .stakeholder-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 20px 15px; }
+            .header { 
+                margin-bottom: 30px; 
+                padding: 0 15px;
+            }
+            .header h1 { 
+                font-size: 1.4em; 
+                margin-bottom: 12px;
+                line-height: 1.3;
+            }
+            .header p { 
+                font-size: 0.9em; 
+                line-height: 1.5;
+                margin-bottom: 5px;
+            }
+            .container { padding: 25px; }
+            .stakeholder-grid {
+                grid-template-columns: 1fr;
+                padding: 0 10px;
+            }
+            .stakeholder-group { 
+                font-size: 0.9em; 
+                padding: 15px; 
+                min-height: 60px;
+            }
+            .section-header h3 {
+                font-size: 1.1em;
+            }
+            .excluded-section { padding: 20px; margin-top: 30px; }
+            .excluded-item { margin-bottom: 15px; padding-bottom: 12px; }
+            .references-section { padding: 20px; margin-top: 30px; }
+            .reference-item { padding-left: 10px; }
+            .info-panel { padding: 25px; width: 95%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>EN101 Curricular Change Initiative</h1>
+        <p>Support System & Stakeholder Map</p>
+        <p style="font-size: 0.9em; margin-top: 10px;">Addressing Inconsistency Across EN101 Sections at MVCC</p>
+    </div>
+    
+    <div class="container">
+        <div class="circles-container">
+            <!-- Core Team Section -->
+            <div class="hierarchy-section">
+                <div class="section-header core">
+                    <h3>Core Team: Direct Leadership & Coordination</h3>
+                </div>
+                <div class="stakeholder-grid">
+                    <div class="stakeholder-group core" data-info="core-coordinator">EN101 Coordinator<br>(New Role)</div>
+                    <div class="stakeholder-group core" data-info="core-dean">Dean, School of<br>Humanities</div>
+                </div>
+            </div>
+            
+            <!-- Close Collaborators Section -->
+            <div class="hierarchy-section">
+                <div class="section-header close">
+                    <h3>Close Collaborators: Direct Implementation Partners</h3>
+                </div>
+                <div class="stakeholder-grid">
+                    <div class="stakeholder-group close" data-info="close-fulltime">EN101 Full-Time<br>Faculty (9)</div>
+                    <div class="stakeholder-group close" data-info="close-adjunct">EN101 Adjunct<br>Instructors (8)</div>
+                    <div class="stakeholder-group close" data-info="close-ils">ILS Instructors</div>
+                    <div class="stakeholder-group close" data-info="close-writing">Writing Center<br>Director</div>
+                </div>
+            </div>
+            
+            <!-- Supporting Units Section -->
+            <div class="hierarchy-section">
+                <div class="section-header supporting">
+                    <h3>Supporting Units: Institutional Support & Resources</h3>
+                </div>
+                <div class="stakeholder-grid">
+                    <div class="stakeholder-group supporting" data-info="support-vpaa">VP of Learning &<br>Academic Affairs</div>
+                    <div class="stakeholder-group supporting" data-info="support-assess">Assessment<br>Coordinator</div>
+                    <div class="stakeholder-group supporting" data-info="support-ir">Institutional<br>Research</div>
+                    <div class="stakeholder-group supporting" data-info="support-facdev">Faculty<br>Development</div>
+                    <div class="stakeholder-group supporting" data-info="support-ctlt">Center for Teaching<br>& Learning</div>
+                    <div class="stakeholder-group supporting" data-info="support-success">Office of Student<br>Success</div>
+                    <div class="stakeholder-group supporting" data-info="support-advising">Academic<br>Advising</div>
+                    <div class="stakeholder-group supporting" data-info="support-it">IT/Educational<br>Technology</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="excluded-section">
+            <h2>📋 Purposefully Excluded Stakeholders</h2>
+            
+            <div class="excluded-item">
+                <h3>Students</h3>
+                <p><strong>Reason for Exclusion:</strong> While students are the ultimate beneficiaries of this change, they are purposefully excluded from the planning and implementation support group. This curricular change involves faculty-facing processes (norming sessions, rubric development, coordination protocols) that require pedagogical expertise. Student input will be gathered through course evaluations and success data analysis, but direct involvement in the planning process would not be appropriate given the professional development nature of the work.</p>
+            </div>
+            
+            <div class="excluded-item">
+                <h3>Faculty from Other Departments</h3>
+                <p><strong>Reason for Exclusion:</strong> This initiative is specifically focused on EN101 instruction within the School of Humanities. While interdisciplinary perspectives can be valuable, expanding the support group to include faculty from other departments would dilute focus and slow decision-making. The shared resources and norming protocols being developed are discipline-specific and require English composition expertise.</p>
+            </div>
+            
+            <div class="excluded-item">
+                <h3>SUNY System Administration</h3>
+                <p><strong>Reason for Exclusion:</strong> Although this initiative directly responds to Chancellor King's Academic Momentum Campaign goals, SUNY System administration is not included as an active support group member. The campus has autonomy to determine how to meet the 80% gateway completion target. SUNY's role is to set expectations and track progress, not to be involved in campus-level implementation strategies.</p>
+            </div>
+        </div>
+        
+        <div class="references-section">
+            <h2>📚 References</h2>
+            <div class="reference-item">
+                <p>SUNY. (2025a). <em>Chancellor King launches SUNY Academic Momentum Campaign to boost retention and completion</em> [Press release]. State University of New York. <a href="https://www.esf.edu/news/2025/suny_academic_momentum_campaign.php" target="_blank">https://www.esf.edu/news/2025/suny_academic_momentum_campaign.php</a></p>
+            </div>
+            <div class="reference-item">
+                <p>SUNY. (2025b). <em>2025 state of the university policy agenda.</em> State University of New York. <a href="https://www.suny.edu/media/suny/content-assets/documents/chancellor/SUNY-State-of-the-University-PolicyAgenda-2025.pdf" target="_blank">https://www.suny.edu/media/suny/content-assets/documents/chancellor/SUNY-State-of-the-University-PolicyAgenda-2025.pdf</a></p>
+            </div>
+            <div class="reference-item">
+                <p>SUNY Office of Student Success. (2025). <em>System/sector goals & proposed campus targets: Mohawk Valley Community College.</em> State University of New York.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="overlay" onclick="closeInfo()"></div>
+    <div class="info-panel">
+        <button class="close-btn" onclick="closeInfo()">×</button>
+        <div id="info-content"></div>
+    </div>
+    
+    <script>
+        const stakeholderInfo = {
+            'core-coordinator': {
+                title: 'EN101 Coordinator (New Role)',
+                role: 'Core Team',
+                description: 'Receives 3-course release to coordinate all EN101 activities. Maintains resource library, facilitates norming sessions, coordinates EN101/ILS pairings, onboards new instructors, and monitors equity outcomes.'
+            },
+            'core-dean': {
+                title: 'Dean, School of Humanities',
+                role: 'Core Team',
+                description: 'Provides leadership, secures resources for coordinator position, ensures alignment with institutional goals, and supports faculty through the change process. Champions the initiative at senior leadership level.'
+            },
+            'close-fulltime': {
+                title: 'EN101 Full-Time Faculty',
+                role: 'Close Collaborators',
+                description: 'Nine instructors who teach stand-alone EN101 sections. Participate in framework development, norming sessions, and contribute to resource library. Bring pedagogical expertise and institutional knowledge.'
+            },
+            'close-adjunct': {
+                title: 'EN101 Adjunct Instructors',
+                role: 'Close Collaborators',
+                description: 'Eight instructors teaching multiple sections. Essential for implementation across all 75 sections. Need structured onboarding and ongoing support to maintain consistency.'
+            },
+            'close-ils': {
+                title: 'ILS Instructors',
+                role: 'Close Collaborators',
+                description: 'Integrated Learning Support instructors paired with co-requisite EN101 sections. Require training in composition pedagogy and clear coordination protocols to effectively support student success.'
+            },
+            'close-writing': {
+                title: 'Writing Center Director',
+                role: 'Close Collaborators',
+                description: 'Aligns tutoring support with EN101 anchor assignments, trains tutors on common rubrics and expectations, and provides supplementary support for students across all sections.'
+            },
+            'support-vpaa': {
+                title: 'VP of Learning & Academic Affairs',
+                role: 'Supporting Unit',
+                description: 'Approves coordinator position and course release, ensures initiative aligns with Academic Momentum goals, provides institutional authority for change, and secures necessary resources.'
+            },
+            'support-assess': {
+                title: 'Assessment Coordinator',
+                role: 'Supporting Unit',
+                description: 'Documents initiative for Middle States self-study, ensures assessment data collection aligns with reaffirmation needs, and connects EN101 improvements to Standard III (Institutional Resources) evidence.'
+            },
+            'support-ir': {
+                title: 'Institutional Research',
+                role: 'Supporting Unit',
+                description: 'Provides completion rate data, disaggregated outcomes by pathway and instructor, tracks progress toward 80% target, and conducts equity analysis to identify disparities.'
+            },
+            'support-facdev': {
+                title: 'Faculty Development',
+                role: 'Supporting Unit',
+                description: 'Provides professional development funding, facilitates workshops on composition pedagogy, supports norming session logistics, and offers resources for pedagogical innovation.'
+            },
+            'support-ctlt': {
+                title: 'Center for Teaching & Learning',
+                role: 'Supporting Unit',
+                description: 'Provides pedagogical consultation, supports development of assignment library, offers workshops on scaffolding and rubric design, and facilitates reflective practice.'
+            },
+            'support-success': {
+                title: 'Office of Student Success',
+                role: 'Supporting Unit',
+                description: 'Monitors gateway course completion aligned with SUNY Academic Momentum, coordinates with advising on placement integrity, and tracks intervention effectiveness for at-risk students.'
+            },
+            'support-advising': {
+                title: 'Academic Advising',
+                role: 'Supporting Unit',
+                description: 'Ensures accurate course placement, communicates pathway equivalence to students, monitors registration patterns, and provides feedback on student understanding of co-requisite model.'
+            },
+            'support-it': {
+                title: 'IT/Educational Technology',
+                role: 'Supporting Unit',
+                description: 'Hosts digital assignment library, provides LMS support for shared resources, ensures accessibility of materials, and supports data collection systems for ongoing assessment.'
+            }
+        };
+        
+        document.querySelectorAll('.stakeholder-group').forEach(group => {
+            group.addEventListener('click', function() {
+                const infoKey = this.getAttribute('data-info');
+                const info = stakeholderInfo[infoKey];
+                
+                document.getElementById('info-content').innerHTML = `
+                    <h2 style="color: #7c3aed; margin-bottom: 15px;">${info.title}</h2>
+                    <p style="color: #8b5cf6; font-weight: 600; margin-bottom: 15px; text-transform: uppercase; font-size: 0.9em;">${info.role}</p>
+                    <p style="line-height: 1.6; color: #374151;">${info.description}</p>
+                `;
+                
+                document.querySelector('.overlay').classList.add('active');
+                document.querySelector('.info-panel').classList.add('active');
+            });
+        });
+        
+        function closeInfo() {
+            document.querySelector('.overlay').classList.remove('active');
+            document.querySelector('.info-panel').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
